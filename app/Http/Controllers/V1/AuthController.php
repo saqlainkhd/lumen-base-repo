@@ -17,7 +17,6 @@ use App\Http\Resources\V1\AuthenticationResponse;
 /**
  * @group Authentication
  */
-
 class AuthController extends Controller
 {
 
@@ -25,8 +24,8 @@ class AuthController extends Controller
      * Login
      * This function is useful for userlogin, to return access token for users.
      *
-     * @bodyParam email email required email of user. Example: demo@domain.com
-     * @bodyParam password string required password of user. Example: 123456
+     * @bodyParam email email required Example: demo@domain.com
+     * @bodyParam password string required Example: 123456
      *
      *
      * @responseFile 200 responses/V1/Auth/LoginResponse.json
