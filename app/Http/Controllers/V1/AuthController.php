@@ -29,8 +29,6 @@ class AuthController extends Controller
      * @bodyParam password string required password of user. Example: Abc*123*
      *
      *
-     * @headerParam Client-ID
-     *
      * @responseFile 200 responses/V1/Auth/LoginResponse.json
      * @responseFile 422 responses/ValidationResponse.json
      */

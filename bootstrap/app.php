@@ -25,9 +25,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +64,9 @@ $app->singleton(
 $app->configure('app');
 $app->configure('auth');
 $app->configure('cors');
+$app->configure('permission');
+
+$app->alias('cache', \Illuminate\Cache\CacheManager::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +85,9 @@ $app->middleware([
 
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
+     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+     'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
+     'client_credendials' => App\Http\Middleware\ClientCredentialsVerification::class,
  ]);
 
 /*
@@ -99,6 +105,10 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register('Nord\Lumen\Cors\CorsServiceProvider');
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Pearl\RequestValidate\RequestServiceProvider::class);
+$app->register(Spatie\Permission\PermissionServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Services\V1;
 
 /* Models */

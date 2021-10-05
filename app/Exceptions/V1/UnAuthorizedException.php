@@ -6,12 +6,12 @@ use App\Exceptions\BaseException;
 
 class UnAuthorizedException extends BaseException
 {
-    public static function UserUnAuthorized(): self
+    public static function userUnauthorized(): self
     {
         return new self("User does not have valid access token!", '403');
     }
 
-    public static function InvalidCredentials(): self
+    public static function invalidCredentials(): self
     {
         return new self("Invalid Email or Password", '401');
     }

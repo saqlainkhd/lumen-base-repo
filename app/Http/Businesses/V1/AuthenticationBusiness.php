@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Businesses\V1;
 
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ class AuthenticationBusiness
 {
     public static function login(Request $request)
     {
-        $user = UserService::first(null, ['customer','member'], ['username' => $request->email]);
+        $user = UserService::first([], ['email' => $request->email]);
    
         // match password
         if (!Hash::check($request->password, $user->password)) {
