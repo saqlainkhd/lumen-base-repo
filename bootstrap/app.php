@@ -68,6 +68,11 @@ $app->configure('permission');
 
 $app->alias('cache', \Illuminate\Cache\CacheManager::class);
 
+if (class_exists(\Knuckles\Scribe\ScribeServiceProvider::class)) {
+    $app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
+    $app->configure('scribe');
+}
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
