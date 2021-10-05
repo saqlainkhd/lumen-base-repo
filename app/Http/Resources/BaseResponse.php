@@ -24,7 +24,7 @@ class BaseResponse extends JsonResource
 
         if (!is_null($error)) {
             $this->error = [
-                'code' => 'BIOWP-' . $error->getCode(),
+                'code' => 'BO-' . $error->getCode(),
                 'message' => $error->getMessage()
             ];
         } else {
