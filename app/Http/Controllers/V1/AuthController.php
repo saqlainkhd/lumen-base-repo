@@ -12,7 +12,7 @@ use App\Http\Requests\V1\LoginRequest;
 use App\Http\Requests\V1\RegisterRequest;
 
 /* Resource */
-use App\Http\Resources\V2\AuthenticationResponse;
+use App\Http\Resources\V1\AuthenticationResponse;
 
 /**
  * @group Authentication
