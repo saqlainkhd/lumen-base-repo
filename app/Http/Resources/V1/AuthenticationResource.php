@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources\V1;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Models\User;
 
-class AuthenticationResource extends Resource
+class AuthenticationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

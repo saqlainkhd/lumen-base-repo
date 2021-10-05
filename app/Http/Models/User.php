@@ -34,4 +34,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public static function getPermissionNames($data): array
+    {
+        return $data->pluck('name')->toArray();
+    }
 }
