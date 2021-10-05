@@ -24,6 +24,8 @@ class AuthController extends Controller
      * Login
      * This function is useful for userlogin, to return access token for users.
      *
+     * @header Client-ID
+     * @header Client-Secret
      * @bodyParam email email required Example: demo@domain.com
      * @bodyParam password string required Example: 123456
      *
