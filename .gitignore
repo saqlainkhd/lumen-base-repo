@@ -1,0 +1,7 @@
+
+.env
+/vendor
+/public/docs/
+/resources/views/
+/resources/docs/
+.vscode
