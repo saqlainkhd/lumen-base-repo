@@ -9,7 +9,6 @@ use App\Http\Businesses\V1\AuthenticationBusiness;
 
 /* Request Validations */
 use App\Http\Requests\V1\LoginRequest;
-use App\Http\Requests\V1\RegisterRequest;
 
 /* Resource */
 use App\Http\Resources\V1\AuthenticationResponse;
