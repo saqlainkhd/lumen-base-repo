@@ -26,7 +26,7 @@ class CustomerController extends Controller
 {
     public function __construct()
     {
-        $this->module = 'invoices';
+        $this->module = 'customers';
         $ULP = '|' . $this->module . '_all|access_all'; //UPPER LEVEL PERMISSIONS
         $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
