@@ -26,8 +26,8 @@ class Initialization extends Seeder
         $now = date('Y-m-d H:i:s');
 
         $permission = array(
-            ['name' => 'access_all', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
-        );
+             ['name' => 'access_all', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+         );
 
         Permission::insert($permission);
 
@@ -38,23 +38,14 @@ class Initialization extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'BuildOne',
             'email' => 'admin@buildone.com',
+            'phone' => '1234567',
+            'city' => 'city',
+            'country' => 'country',
             'password' => Hash::make('123456'),
             'status' => User::STATUS['active']
 
         ]);
 
         $user->assignRole('admin');
-
-        $user = User::create([
-            'first_name' => 'customer',
-            'last_name' => 'customer',
-            'email' => 'customer@buildone.com',
-            'password' => Hash::make('123456'),
-            'status' => User::STATUS['active']
-
-        ]);
-        
-
-        $user->assignRole('customer');
     }
 }

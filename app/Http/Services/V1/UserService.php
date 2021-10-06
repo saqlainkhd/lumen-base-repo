@@ -49,8 +49,11 @@ class UserService
         $user = new User();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        $user->city = $request->city;
+        $user->country = $request->country;
         $user->email = strtolower($request->email);
+        $user->password = Hash::make($request->password);
         $user->status = User::STATUS['pending'];
         $user->save();
 
