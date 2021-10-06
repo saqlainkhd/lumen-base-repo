@@ -18,8 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('city');
+            $table->string('country');
             $table->string('password');
-            $table->unsignedInteger('status')->default(0)->comment = '[pending => 0, active => 1, blocked => 2]';
+            $table->unsignedInteger('status')->default(0);
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();

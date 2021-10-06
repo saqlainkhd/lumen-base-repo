@@ -39,4 +39,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $data->pluck('name')->toArray();
     }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
 }
