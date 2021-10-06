@@ -18,6 +18,11 @@ use Illuminate\Http\Request;
 
 class CustomerBusiness
 {
+    public static function get(Request $request)
+    {
+        return UserService::get($request, ['customer'], ['customer']);
+    }
+
     public static function store(Request $request)
     {
         $status = ($request->filled('status')) ? Customer::STATUS[$request->status] : null;

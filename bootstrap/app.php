@@ -65,6 +65,7 @@ $app->configure('app');
 $app->configure('auth');
 $app->configure('cors');
 $app->configure('permission');
+$app->configure('build_one');
 
 
 if (class_exists(\Knuckles\Scribe\ScribeServiceProvider::class)) {

@@ -44,4 +44,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasOne(Customer::class);
     }
+
+    public static function clean($value)
+    {
+        $value = strtolower($value);
+        
+        if (strpos($value, ',') !== false) {
+            return explode(",", $value);
+        }
+
+        return $value;
+    }
+
+    public function scopeRoles($query, array $names)
+    {
+        return $query->whereHas('roles', function ($query) use ($names) {
+            $query->whereIn('name', $names);
+        });
+    }
 }
