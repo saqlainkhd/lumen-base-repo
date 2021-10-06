@@ -30,7 +30,7 @@ class CustomerListRequest extends RequestAbstract
         return [
             'from_date' => 'nullable|date_format:Y-m-d|date',
             'to_date' => 'nullable|date_format:Y-m-d|date',
-            'status' => 'string|'. Rule::in(array_values(User::STATUS)),
+            'status' => 'string',
             'order_by' => 'string|'. Rule::in(['asc','desc']),
         ];
     }
