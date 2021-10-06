@@ -9,6 +9,8 @@ use Dyrynda\Database\Support\CascadeSoftDeletes;
 class Customer extends Model
 {
     use UserAuditTrait,CascadeSoftDeletes;
+
+    public const SEARCHABLE = ['name','email'];
     
     public function user()
     {

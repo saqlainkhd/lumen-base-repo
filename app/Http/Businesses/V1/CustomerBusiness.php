@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Auth;
 /* Exceptions */
 use App\Exceptions\V1\UnauthorizedException;
 use App\Exceptions\V1\ModelException;
-
 /* Services */
 use App\Http\Services\V1\UserService;
 use App\Http\Services\V1\CustomerService;
 
 /* Models */
 use App\Http\Models\User;
+use App\Http\Models\Customer;
 
 /* Helpers */
 use Illuminate\Http\Request;
@@ -55,5 +55,23 @@ class CustomerBusiness
         $user = UserService::update($user, $request, $status);
         $customer = CustomerService::update($user->customer, $status);
         return $user->load('customer');
+    }
+
+   
+    public static function search(Request $request)
+    {
+        // $request->request->add([$request->field => $request->value]);
+        $users =  UserService::search($request, ['customer']);
+        $results = [];
+        
+        if ($users) {
+            foreach ($users as $key => $user) {
+                $data = new \stdClass;
+                $data->id = $user->id;
+                $data->value = $user->first_name . ' '.$user->last_name ;
+                $results[] = $data;
+            }
+        }
+        return collect($results);
     }
 }

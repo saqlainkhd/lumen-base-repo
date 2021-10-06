@@ -153,4 +153,38 @@ class UserService
         
         return $user;
     }
+
+    public static function search(Request $request, array $roles)
+    {
+        $query = User::query()->withTrashed()->roles($roles);
+     
+        if ($request->filled('field') && $request->field == 'name') {
+            $name = User::clean($request->value);
+
+            if (is_array($name)) {
+                $query->whereRaw("CONCAT(TRIM(LOWER(first_name)) , ' ' ,TRIM(LOWER(last_name))) in ('" . join("', '", $name) . "')");
+            } else {
+                $query->whereRaw("CONCAT(LOWER(first_name) , ' ' ,LOWER(last_name)) like ? ", '%'. $name . '%');
+            }
+        }
+
+
+        if ($request->filled('field') && $request->field == 'email') {
+            $email = User::clean($request->value);
+
+            if (is_array($email)) {
+                $query->whereRaw("TRIM(LOWER(email)) in ('" . join("', '", $email) . "')");
+            } else {
+                $query->whereRaw("TRIM(LOWER(email)) like ? ", '%'. $email .'%');
+            }
+        }
+        
+        if ($request->filled('deleted') && $request->deleted == 'true') {
+            $query->whereNotNull('deleted_at');
+        } else {
+            $query->whereNull('deleted_at');
+        }
+
+        return $query->take(10)->get();
+    }
 }

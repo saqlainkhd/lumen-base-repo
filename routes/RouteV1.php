@@ -15,6 +15,7 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
             $router->put('/{id}', 'CustomerController@update');
             $router->get('/{id}', 'CustomerController@show');
             $router->delete('/{id}', 'CustomerController@destory');
+            $router->get('/search', 'CustomerController@search');
         });
     });
 });

@@ -10,10 +10,12 @@ use App\Http\Businesses\V1\CustomerBusiness;
 /* Request Validations */
 use App\Http\Requests\V1\CustomerRequest;
 use App\Http\Requests\V1\CustomerListRequest;
+use App\Http\Requests\V1\SmartSearchRequest;
 
 /* Resource */
 use App\Http\Resources\V1\CustomerResponse;
 use App\Http\Resources\V1\CustomersResponse;
+use App\Http\Resources\V1\SmartSearchResponse;
 use App\Http\Resources\SuccessResponse;
 
 /* Helpers */
@@ -34,6 +36,7 @@ class CustomerController extends Controller
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
         $this->middleware('permission:' . $this->module . '_delete' . $ULP, ['only' => ['destory']]);
         $this->middleware('permission:' . $this->module . '_update' . $ULP, ['only' => ['update']]);
+        $this->middleware('permission:' . $this->module . '_search' . $ULP, ['only' => ['search']]);
     }
 
     /**
@@ -150,5 +153,26 @@ class CustomerController extends Controller
         $customer = CustomerBusiness::update($request, $id);
         DB::commit();
         return new CustomerResponse($customer);
+    }
+
+    /**
+    *
+    * Smart Search
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam field string required ex: name or email
+    * @urlParam value string required ex: Ali or ali@gmail.com
+    * @urlParam deleted boolean
+    *
+    * @responseFile 200 responses/V1/Customer/SmartSearchResponse.json
+    * @responseFile 422 responses/ValidationResponse.json
+    *
+    */
+    public static function search(SmartSearchRequest $request)
+    {
+        $data = CustomerBusiness::search($request);
+        return new SmartSearchResponse($data);
     }
 }
