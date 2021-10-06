@@ -32,6 +32,7 @@ class CustomerController extends Controller
         $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
+        $this->middleware('permission:' . $this->module . '_delete' . $ULP, ['only' => ['destory']]);
     }
 
     /**
