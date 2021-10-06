@@ -144,7 +144,6 @@ class UserService
         $user->city = $request->city;
         $user->country = $request->country;
         $user->email = strtolower($request->email);
-        $user->password = Hash::make($request->password);
         $user->status = $status ?: User::STATUS['pending'];
         $user->save();
 

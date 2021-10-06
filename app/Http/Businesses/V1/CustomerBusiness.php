@@ -47,7 +47,7 @@ class CustomerBusiness
     {
         $user = UserService::first(['customer'], ['id' => $id]);
 
-        if ($user->id != \Auth::id()) {
+        if ($user->id != \Auth::id() && !\Auth::user()->can('access_all')) {
             throw ModelException::dataNotFound();
         }
 

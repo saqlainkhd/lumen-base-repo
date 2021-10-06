@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Traits\UserAuditTrait;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasApiTokens, HasRoles, SoftDeletes;
+    use Authenticatable, Authorizable, HasApiTokens, HasRoles, UserAuditTrait, CascadeSoftDeletes;
+
+    protected $cascadeDeletes = ['customer'];
 
     public const STATUS = ['pending' => 0, 'active' => 1, 'blocked' => 2];
 
