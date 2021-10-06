@@ -24,7 +24,8 @@ class UserResource extends JsonResource
             'city' => $this->city,
             'country' => $this->country,
             'created_at'=>$this->created_at,
-            'status' => array_search($this->status, User::STATUS)
+            'status' => array_search($this->status, User::STATUS),
+            'customer' => new CustomerResource($this->whenLoaded('customer')),
         ];
     }
 }

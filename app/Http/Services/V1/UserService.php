@@ -63,7 +63,7 @@ class UserService
 
         self::assignRole($role, $user);
 
-        return $user;
+        return $user->fresh();
     }
 
     /**

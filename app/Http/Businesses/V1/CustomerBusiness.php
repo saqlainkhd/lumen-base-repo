@@ -21,7 +21,7 @@ class CustomerBusiness
     public static function store(Request $request)
     {
         $user = UserService::store($request, 'customer');
-        // $customer = CustomerService::store($user, Customer::STATUS['pending']);
-        return $user->fresh();
+        $customer = CustomerService::store($user, Customer::STATUS['pending']);
+        return $user->load('customer');
     }
 }

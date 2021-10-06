@@ -62,9 +62,9 @@ class BaseResponse extends JsonResource
             ];
         }
       
-        /*  if (\Auth::check() && $this->success) {
-             $response['permissions'] = \Auth::user()->getAllPermissions()->pluck('name');
-         } */
+        if (\Auth::check() && $this->success) {
+            $response['permissions'] = \Auth::user()->getAllPermissions()->pluck('name');
+        }
 
         return [
             "data" => $response,
