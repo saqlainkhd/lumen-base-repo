@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Businesses\V1\CustomerBusiness;
 
 /* Request Validations */
-use App\Http\Requests\V1\CreateCustomerRequest;
+use App\Http\Requests\V1\CustomerRequest;
 use App\Http\Requests\V1\CustomerListRequest;
 
 /* Resource */
@@ -33,6 +33,7 @@ class CustomerController extends Controller
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
         $this->middleware('permission:' . $this->module . '_delete' . $ULP, ['only' => ['destory']]);
+        $this->middleware('permission:' . $this->module . '_update' . $ULP, ['only' => ['update']]);
     }
 
     /**
@@ -72,7 +73,7 @@ class CustomerController extends Controller
     * @bodyParam email email required User email address Example: customer@domain.com
     * @bodyParam password string required User password Example: abcd1234
     * @bodyParam password_confirmation string required User password Example: abcd1234
-    * @bodyParam phone string optional User contact number module Example: 12
+    * @bodyParam phone string required User contact number Example: 12
     * @bodyParam city Integer required
     * @bodyParam country string required
     * @bodyParam status string required ex: pending,active
@@ -80,7 +81,7 @@ class CustomerController extends Controller
     * @responseFile 200 responses/V1/Customer/CreateResponse.json
     * @responseFile 422 responses/ValidationResponse.json
     */
-    public function create(CreateCustomerRequest $request)
+    public function create(CustomerRequest $request)
     {
         DB::beginTransaction();
         $customer = CustomerBusiness::store($request);
@@ -123,5 +124,31 @@ class CustomerController extends Controller
     {
         $customer = CustomerBusiness::delete($id);
         return new SuccessResponse([]);
+    }
+
+    /**
+    * Update Customer
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam id integer required
+    * @bodyParam first_name string
+    * @bodyParam last_name string
+    * @bodyParam email email required
+    * @bodyParam phone string required
+    * @bodyParam city Integer required
+    * @bodyParam country string required
+    * @bodyParam status string required ex: pending,active
+    *
+    * @responseFile 200 responses/V1/Customer/CreateResponse.json
+    * @responseFile 422 responses/ValidationResponse.json
+    */
+    public function update(CustomerRequest $request, int $id)
+    {
+        DB::beginTransaction();
+        $customer = CustomerBusiness::update($request, $id);
+        DB::commit();
+        return new CustomerResponse($customer);
     }
 }

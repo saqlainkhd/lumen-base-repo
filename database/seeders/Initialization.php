@@ -31,12 +31,17 @@ class Initialization extends Seeder
 
         $permission = array(
              ['name' => 'access_all', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'customers_list', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'customers_create', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'customers_detail', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'customers_delete', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'customers_update', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
          );
 
         Permission::insert($permission);
 
         $admin = Role::create(['name' => 'admin'])->givePermissionTo(['access_all']);
-        Role::create(['name' => 'customer']);
+        Role::create(['name' => 'customer'])->givePermissionTo(['access_all']);
 
         $user = User::create([
             'first_name' => 'Admin',

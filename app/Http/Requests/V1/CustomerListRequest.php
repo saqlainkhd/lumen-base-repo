@@ -4,7 +4,7 @@ namespace App\Http\Requests\V1;
 
 use Pearl\RequestValidate\RequestAbstract;
 
-use App\Http\Models\Customer;
+use App\Http\Models\User;
 
 use Illuminate\Validation\Rule;
 
@@ -30,7 +30,7 @@ class CustomerListRequest extends RequestAbstract
         return [
             'from_date' => 'nullable|date_format:Y-m-d|date',
             'to_date' => 'nullable|date_format:Y-m-d|date',
-            'status' => 'array|'. Rule::in(array_values(Customer::STATUS)),
+            'status' => 'string|'. Rule::in(array_values(User::STATUS)),
             'order_by' => 'string|'. Rule::in(['asc','desc']),
         ];
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Models\Customer;
+use App\Http\Models\User;
 
 class CustomerResource extends JsonResource
 {
@@ -18,7 +18,7 @@ class CustomerResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'status' => array_search($this->status, Customer::STATUS)
+            'status' => array_search($this->status, User::STATUS)
         ];
     }
 }

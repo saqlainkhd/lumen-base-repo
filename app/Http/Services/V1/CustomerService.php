@@ -18,7 +18,19 @@ class CustomerService
     {
         $customer = new Customer();
         $customer->user_id = $user->id;
-        $customer->status = $status ?: Customer::STATUS['pending'];
+        $customer->status = $status ?: User::STATUS['pending'];
+        $customer->save();
+
+        if (!$customer) {
+            throw FailureException::serverError();
+        }
+
+        return $customer;
+    }
+
+    public static function update(Customer $customer, $status = null)
+    {
+        $customer->status = $status ?: User::STATUS['pending'];
         $customer->save();
 
         if (!$customer) {
