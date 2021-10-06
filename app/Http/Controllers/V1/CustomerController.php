@@ -48,6 +48,7 @@ class CustomerController extends Controller
     * @urlParam users string 1,2,3,4
     * @urlParam email string ex: abc.com,xyz.co
     * @urlParam phone string ex: 123,123456
+    * @urlParam name string
     * @urlParam status string ex: pending,active,blocked
     * @urlParam to_date string Example: Y-m-d
     * @urlParam from_date string Example: Y-m-d

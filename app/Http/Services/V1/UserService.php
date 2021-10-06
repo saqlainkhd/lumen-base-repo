@@ -85,6 +85,17 @@ class UserService
             $users->whereIn('id', $ids);
         }
 
+        
+        if ($request->has('name')) {
+            $name = User::clean($request->name);
+
+            if (is_array($name)) {
+                $users->whereRaw("CONCAT(TRIM(LOWER(first_name)) , ' ' ,TRIM(LOWER(last_name))) in ('" . join("', '", $name) . "')");
+            } else {
+                $users->whereRaw("CONCAT(LOWER(first_name) , ' ' ,LOWER(last_name)) like ? ", '%'. $name . '%');
+            }
+        }
+
         if ($request->has('phone')) {
             $phone = User::clean($request->phone);
 
