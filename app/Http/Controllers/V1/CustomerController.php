@@ -32,10 +32,11 @@ class CustomerController extends Controller
     * @bodyParam phone string optional User contact number module Example: 12
     * @bodyParam city Integer required
     * @bodyParam country string required
-     *
-     * @responseFile 200 responses/V1/Customer/CreateResponse.json
-     * @responseFile 422 responses/ValidationResponse.json
-     */
+    * @bodyParam status string required ex: pending,active
+    *
+    * @responseFile 200 responses/V1/Customer/CreateResponse.json
+    * @responseFile 422 responses/ValidationResponse.json
+    */
     public function create(CreateCustomerRequest $request)
     {
         DB::beginTransaction();

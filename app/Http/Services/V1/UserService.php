@@ -44,7 +44,7 @@ class UserService
         $token->save();
     }
 
-    public static function store(Request $request, $role)
+    public static function store(Request $request, $role, $status = null)
     {
         $user = new User();
         $user->first_name = $request->first_name;
@@ -54,7 +54,7 @@ class UserService
         $user->country = $request->country;
         $user->email = strtolower($request->email);
         $user->password = Hash::make($request->password);
-        $user->status = User::STATUS['pending'];
+        $user->status = $status ?: User::STATUS['pending'];
         $user->save();
 
         if (!$user) {

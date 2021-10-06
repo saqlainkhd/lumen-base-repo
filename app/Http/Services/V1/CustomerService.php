@@ -14,11 +14,11 @@ use App\Exceptions\V1\FailureException;
 
 class CustomerService
 {
-    public static function store(User $user, Int $status)
+    public static function store(User $user, $status = null)
     {
         $customer = new Customer();
         $customer->user_id = $user->id;
-        $customer->status = $status;
+        $customer->status = $status ?: Customer::STATUS['pending'];
         $customer->save();
 
         if (!$customer) {

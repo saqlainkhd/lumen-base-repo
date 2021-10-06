@@ -4,6 +4,10 @@ namespace App\Http\Requests\V1;
 
 use Pearl\RequestValidate\RequestAbstract;
 
+use App\Http\Models\Customer;
+
+use Illuminate\Validation\Rule;
+
 class CreateCustomerRequest extends RequestAbstract
 {
     /**
@@ -30,7 +34,8 @@ class CreateCustomerRequest extends RequestAbstract
             'country' => 'string|required',
             'phone' => 'required|numeric|max:999999999999999999999999|unique:users,phone',
             'email' => 'required|email:rfc,dns|max:50|email|unique:users,email',
-            'password' => 'required|confirmed|min:6||max:100|string'
+            'password' => 'required|confirmed|min:6||max:100|string',
+            'status' => 'required|string|'. Rule::in(array_keys(Customer::STATUS)),
         ];
     }
 

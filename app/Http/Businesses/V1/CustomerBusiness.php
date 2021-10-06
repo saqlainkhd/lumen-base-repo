@@ -20,8 +20,9 @@ class CustomerBusiness
 {
     public static function store(Request $request)
     {
-        $user = UserService::store($request, 'customer');
-        $customer = CustomerService::store($user, Customer::STATUS['pending']);
+        $status = ($request->filled('status')) ? Customer::STATUS[$request->status] : null;
+        $user = UserService::store($request, 'customer', $status);
+        $customer = CustomerService::store($user, $status);
         return $user->load('customer');
     }
 }
