@@ -21,4 +21,5 @@ class RequestValidationException extends BaseException
             '422'
         );
     }
+    
 }

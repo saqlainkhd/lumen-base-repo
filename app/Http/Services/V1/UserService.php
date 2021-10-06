@@ -82,39 +82,16 @@ class UserService
 
         if ($request->has("users")) {
             $ids = \getIds($request->users);
-            $users->orWhereIn('id', $ids);
+            $users->whereIn('id', $ids);
         }
 
+        if ($request->has('phone')) {
+            $phone = User::clean($request->phone);
 
-        if ($request->has('full_name')) {
-            $fullName = User::clean($request->full_name);
-
-            if (is_array($fullName)) {
-                $users->whereRaw("CONCAT(TRIM(LOWER(first_name)) , ' ' ,TRIM(LOWER(last_name))) in ('" . join("', '", $fullName) . "')");
+            if (is_array($phone)) {
+                $users->whereRaw("TRIM(LOWER(phone)) in  ('" . join("', '", $phone) . "')");
             } else {
-                $users->whereRaw("CONCAT(LOWER(first_name) , ' ' ,LOWER(last_name)) = ? ", $fullName);
-            }
-        }
-
-
-        if ($request->has('first_name')) {
-            $fname = User::clean($request->first_name);
-
-
-            if (is_array($fname)) {
-                $users->whereRaw("TRIM(LOWER(first_name)) in  ('" . join("', '", $fname) . "')");
-            } else {
-                $users->whereRaw('TRIM(LOWER(first_name)) = ?', $fname);
-            }
-        }
-
-        if ($request->has('last_name')) {
-            $lname = User::clean($request->last_name);
-
-            if (is_array($lname)) {
-                $users->whereRaw("TRIM(LOWER(last_name)) in  ('" . join("', '", $lname) . "')");
-            } else {
-                $users->whereRaw('TRIM(LOWER(last_name)) = ?', $lname);
+                $users->whereRaw('TRIM(LOWER(phone)) like ? ', '%' .  $phone. '%');
             }
         }
 
@@ -122,25 +99,30 @@ class UserService
             $email = User::clean($request->email);
 
             if (is_array($email)) {
-                $users->whereRaw("TRIM(LOWER(username)) in  ('" . join("', '", $email) . "')");
+                $users->whereRaw("TRIM(LOWER(email)) in  ('" . join("', '", $email) . "')");
             } else {
-                $users->whereRaw('TRIM(LOWER(username)) = ?', $email);
+                $users->whereRaw('TRIM(LOWER(email)) like ? ', '%' .  $email. '%');
             }
         }
-
 
         if ($request->has('status')) {
             $ids = \getIds($request->status);
             $users->wherein('status', $ids);
         }
 
-        if ($request->has('from_register_date')) {
-            $from = TimeStampHelper::formateDate($request->from_register_date);
+        if ($request->has('order_by')) {
+            $users->orderBy('id', $request->get('order_by'));
+        } else {
+            $users->orderBy('id', 'desc');
+        }
+
+        if ($request->has('from_date')) {
+            $from = TimeStampHelper::formateDate($request->from_date);
             $users->whereDate('created_at', '>=', $from);
         }
 
-        if ($request->has('to_register_date')) {
-            $to = TimeStampHelper::formateDate($request->to_register_date);
+        if ($request->has('to_date')) {
+            $to = TimeStampHelper::formateDate($request->to_date);
             $users->whereDate('created_at', '<=', $to);
         }
 

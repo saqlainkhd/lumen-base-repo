@@ -9,6 +9,7 @@ use App\Http\Businesses\V1\CustomerBusiness;
 
 /* Request Validations */
 use App\Http\Requests\V1\CreateCustomerRequest;
+use App\Http\Requests\V1\CustomerListRequest;
 
 /* Resource */
 use App\Http\Resources\V1\CustomerResponse;
@@ -36,19 +37,19 @@ class CustomerController extends Controller
     *
     * @authenticated
     *
-    * @urlParam users string [1,2,3,4]
-    * @urlParam search string ex: name or id
-    * @urlParam search_by string ex: name,id
+    * @urlParam users string 1,2,3,4
+    * @urlParam email string ex: abc.com,xyz.co
+    * @urlParam phone string ex: 123,123456
     * @urlParam status string ex: pending,active,blocked
-    * @urlParam to_register_date string Example: Y-m-d
-    * @urlParam from_register_date string Example: Y-m-d
+    * @urlParam to_date string Example: Y-m-d
+    * @urlParam from_date string Example: Y-m-d
     *
     * @responseFile 200 responses/V1/Customer/ListResponse.json
     * @responseFile 401 responses/ValidationResponse.json
     *
     */
 
-    public function index(Request $request)
+    public function index(CustomerListRequest $request)
     {
         $customers = CustomerBusiness::get($request);
         return new CustomersResponse($customers);
