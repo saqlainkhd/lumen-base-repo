@@ -4,7 +4,7 @@ namespace App\Http\Businesses\V1;
 use Illuminate\Support\Facades\Auth;
 
 /* Exceptions */
-use App\Exceptions\V1\UnAuthorizedException;
+use App\Exceptions\V1\UnauthorizedException;
 
 /* Services */
 use App\Http\Services\V1\UserService;

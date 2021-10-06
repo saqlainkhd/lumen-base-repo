@@ -12,6 +12,8 @@ use App\Http\Models\Contact;
 use App\Http\Models\UserContact;
 use App\Http\Models\User;
 
+use DB;
+
 class Initialization extends Seeder
 {
     /**
@@ -22,6 +24,8 @@ class Initialization extends Seeder
     public function run()
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        DB::beginTransaction();
 
         $now = date('Y-m-d H:i:s');
 
@@ -47,5 +51,7 @@ class Initialization extends Seeder
         ]);
 
         $user->assignRole('admin');
+
+        DB::commit();
     }
 }

@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Support\Facades\DB;
 
 /* Exception */
-use App\Exceptions\V1\UnAuthorizedException;
+use App\Exceptions\V1\UnauthorizedException;
 
 class ClientCredentialsVerification
 {
@@ -25,7 +25,7 @@ class ClientCredentialsVerification
         // Pre-Middleware Action
         $validate = $this->verifyClient($request);
         if (!$validate) {
-            throw UnAuthorizedException::userUnauthorized();
+            throw UnauthorizedException::unauthorized();
         }
 
         $response = $next($request);
