@@ -11,5 +11,6 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/customers', 'CustomerController@index');
         $router->post('/customers', 'CustomerController@create');
+        $router->get('/customers/{id}', 'CustomerController@show');
     });
 });

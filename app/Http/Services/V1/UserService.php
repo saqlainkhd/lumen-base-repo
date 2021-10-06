@@ -126,7 +126,7 @@ class UserService
             $users->whereDate('created_at', '<=', $to);
         }
 
-        return  ($request->filled('pagination') && $request->get('pagination') == false)
+        return  ($request->filled('pagination') && $request->get('pagination') == 'false')
                     ? $users->get()
                     : $users->paginate(\pageLimit($request));
     }

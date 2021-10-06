@@ -30,4 +30,9 @@ class CustomerBusiness
         $customer = CustomerService::store($user, $status);
         return $user->load('customer');
     }
+
+    public static function show(int $id)
+    {
+        return UserService::first(['customer'], ['id' => $id]);
+    }
 }

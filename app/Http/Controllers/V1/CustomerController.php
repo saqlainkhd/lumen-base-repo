@@ -30,6 +30,7 @@ class CustomerController extends Controller
         $ULP = '|' . $this->module . '_all|access_all'; //UPPER LEVEL PERMISSIONS
         $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
+        $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
     }
 
     /**
@@ -43,6 +44,7 @@ class CustomerController extends Controller
     * @urlParam status string ex: pending,active,blocked
     * @urlParam to_date string Example: Y-m-d
     * @urlParam from_date string Example: Y-m-d
+    * @urlParam pagination boolean
     *
     * @responseFile 200 responses/V1/Customer/ListResponse.json
     * @responseFile 401 responses/ValidationResponse.json
@@ -79,6 +81,24 @@ class CustomerController extends Controller
         DB::beginTransaction();
         $customer = CustomerBusiness::store($request);
         DB::commit();
+        return new CustomerResponse($customer);
+    }
+
+
+    /**
+    * Show Customer Detail
+    *
+    * @authenticated
+    *
+    * @urlParam customer_id required
+    *
+    * @responseFile 200 responses/V1/Customer/CreateResponse.json
+    * @responseFile 401 responses/ValidationResponse.json
+    *
+    */
+    public function show(int $id)
+    {
+        $customer = CustomerBusiness::show($id);
         return new CustomerResponse($customer);
     }
 }
