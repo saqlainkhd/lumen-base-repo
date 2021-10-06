@@ -130,4 +130,9 @@ class UserService
                     ? $users->get()
                     : $users->paginate(\pageLimit($request));
     }
+
+    public static function delete(User $user)
+    {
+        return $user->delete();
+    }
 }

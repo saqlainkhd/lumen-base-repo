@@ -14,6 +14,7 @@ use App\Http\Requests\V1\CustomerListRequest;
 /* Resource */
 use App\Http\Resources\V1\CustomerResponse;
 use App\Http\Resources\V1\CustomersResponse;
+use App\Http\Resources\SuccessResponse;
 
 /* Helpers */
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class CustomerController extends Controller
     * Get Customers
     *
     * @authenticated
+    * @header Authorization Bearer token
     *
     * @urlParam users string 1,2,3,4
     * @urlParam email string ex: abc.com,xyz.co
@@ -62,6 +64,7 @@ class CustomerController extends Controller
     * Create Customer
     *
     * @authenticated
+    * @header Authorization Bearer token
     *
     * @bodyParam first_name string required User first name Example: Jon
     * @bodyParam last_name string required User last name Example: Doe
@@ -89,8 +92,9 @@ class CustomerController extends Controller
     * Show Customer Detail
     *
     * @authenticated
+    * @header Authorization Bearer token
     *
-    * @urlParam customer_id required
+    * @urlParam id integer required
     *
     * @responseFile 200 responses/V1/Customer/CreateResponse.json
     * @responseFile 401 responses/ValidationResponse.json
@@ -100,5 +104,23 @@ class CustomerController extends Controller
     {
         $customer = CustomerBusiness::show($id);
         return new CustomerResponse($customer);
+    }
+
+    /**
+    * Delete Customer
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam id integer required
+    *
+    * @responseFile 200 responses/SuccessResponse.json
+    * @responseFile 401 responses/ValidationResponse.json
+    *
+    */
+    public function destory(int $id)
+    {
+        $customer = CustomerBusiness::delete($id);
+        return new SuccessResponse([]);
     }
 }

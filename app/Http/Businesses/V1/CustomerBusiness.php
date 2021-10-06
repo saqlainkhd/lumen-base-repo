@@ -35,4 +35,10 @@ class CustomerBusiness
     {
         return UserService::first(['customer'], ['id' => $id]);
     }
+
+    public static function delete(int $id) : void
+    {
+        $user = UserService::first(['customer'], ['id' => $id]);
+        UserService::delete($user);
+    }
 }
