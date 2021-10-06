@@ -20,6 +20,12 @@ use DB;
  */
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->module = 'invoices';
+        $ULP = '|' . $this->module . '_all|access_all'; //UPPER LEVEL PERMISSIONS
+        $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
+    }
 
     /**
     * Create Customer

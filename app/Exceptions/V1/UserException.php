@@ -13,4 +13,12 @@ class UserException extends BaseException
             '401'
         );
     }
+
+    public static function permission(): self
+    {
+        return new self(
+            'Permission denied!',
+            '403'
+        );
+    }
 }

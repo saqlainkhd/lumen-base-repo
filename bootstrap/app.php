@@ -92,6 +92,7 @@ $app->middleware([
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
      'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+     'permission' => App\Http\Middleware\PermissionMiddlware::class,
      'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
      'client_credendials' => App\Http\Middleware\ClientCredentialsVerification::class,
  ]);
