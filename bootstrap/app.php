@@ -68,9 +68,9 @@ $app->configure('permission');
 $app->configure('build_one');
 
 
-if (class_exists(\Knuckles\Scribe\ScribeServiceProvider::class)) {
+if (class_exists(Knuckles\Scribe\ScribeServiceProvider::class)) {
+    $app->register(Knuckles\Scribe\ScribeServiceProvider::class);
     $app->configure('scribe');
-    $app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
 }
 
 $app->alias('cache', \Illuminate\Cache\CacheManager::class);

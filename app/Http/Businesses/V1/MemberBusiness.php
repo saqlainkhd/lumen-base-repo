@@ -49,4 +49,22 @@ class MemberBusiness
         $memeber = MemberService::update($user->member, $status);
         return $user->load('member');
     }
+
+    public static function search(Request $request)
+    {
+        $request->merge([$request->field => $request->value]);
+        $users =  UserService::search($request, ['member']);
+        $results = [];
+        
+        if ($users) {
+            foreach ($users as $key => $user) {
+                $data = new \stdClass;
+                $data->id = $user->id;
+                $data->value = $user->first_name . ' '.$user->last_name ;
+                $results[] = $data;
+            }
+        }
+        
+        return collect($results);
+    }
 }

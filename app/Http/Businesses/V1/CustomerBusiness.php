@@ -72,6 +72,7 @@ class CustomerBusiness
                 $results[] = $data;
             }
         }
+        
         return collect($results);
     }
 }

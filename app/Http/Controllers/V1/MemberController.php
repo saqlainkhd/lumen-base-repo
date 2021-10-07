@@ -10,10 +10,12 @@ use App\Http\Businesses\V1\MemberBusiness;
 /* Request Validations */
 use App\Http\Requests\V1\MemberRequest;
 use App\Http\Requests\V1\MemberListRequest;
+use App\Http\Requests\V1\SmartSearchRequest;
 
 /* Resource */
 use App\Http\Resources\V1\MemberResponse;
 use App\Http\Resources\V1\MembersResponse;
+use App\Http\Resources\V1\SmartSearchResponse;
 
 /* Helpers */
 use Illuminate\Http\Request;
@@ -32,6 +34,7 @@ class MemberController extends Controller
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
         $this->middleware('permission:' . $this->module . '_update' . $ULP, ['only' => ['update']]);
+        $this->middleware('permission:' . $this->module . '_search' . $ULP, ['only' => ['search']]);
     }
 
     /**
@@ -130,5 +133,27 @@ class MemberController extends Controller
         $member = MemberBusiness::update($request, $id);
         DB::commit();
         return new MemberResponse($member);
+    }
+
+    /**
+    *
+    * Smart Search
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam field string required ex: name or email
+    * @urlParam value string required ex: Ali or ali@gmail.com
+    * @urlParam deleted boolean
+    * @urlParam page_limit integer
+    *
+    * @responseFile 200 responses/V1/Member/SmartSearchResponse.json
+    * @responseFile 422 responses/ValidationResponse.json
+    *
+    */
+    public static function search(SmartSearchRequest $request)
+    {
+        $data = MemberBusiness::search($request);
+        return new SmartSearchResponse($data);
     }
 }
