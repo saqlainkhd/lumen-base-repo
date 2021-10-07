@@ -39,7 +39,7 @@ class CustomerController extends Controller
     *
     * @bodyParam first_name string required User first name Example: Jon
     * @bodyParam last_name string required User last name Example: Doe
-    * @bodyParam email email required User email address Example: customer@domain.com
+    * @bodyParam email email required User email address Example: member@domain.com
     * @bodyParam password string required User password Example: abcd1234
     * @bodyParam password_confirmation string required User password Example: abcd1234
     * @bodyParam phone string required User contact number Example: 12
