@@ -17,5 +17,9 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
             $router->delete('/{id}', 'CustomerController@destory');
             $router->get('/search', 'CustomerController@search');
         });
+
+        $router->group(['prefix' => 'members'], function () use ($router) {
+            $router->post('/', 'MemberController@create');
+        });
     });
 });
