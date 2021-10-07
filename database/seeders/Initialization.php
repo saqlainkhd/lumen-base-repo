@@ -36,12 +36,18 @@ class Initialization extends Seeder
              ['name' => 'customers_detail', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
              ['name' => 'customers_delete', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
              ['name' => 'customers_update', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'members_list', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'members_create', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'members_detail', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'members_delete', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
+             ['name' => 'members_update', 'guard_name' => 'api' ,'created_at'=> $now ,'updated_at'=> $now],
          );
 
         Permission::insert($permission);
 
         $admin = Role::create(['name' => 'admin'])->givePermissionTo(['access_all']);
-        Role::create(['name' => 'customer'])->givePermissionTo(['access_all']);
+        Role::create(['name' => 'customer'])->givePermissionTo(['customers_update']);
+        Role::create(['name' => 'member'])->givePermissionTo(['members_update']);
 
         $user = User::create([
             'first_name' => 'Admin',
