@@ -5,6 +5,13 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
+
+/* Exception */
+use App\Exceptions\V1\UserException;
+                    
+/** Services */
+use App\Http\Services\V1\UserService;
+
 class Authenticate
 {
     /**
@@ -36,8 +43,10 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+            throw UserException::sessionExpired();
         }
+      
+        UserService::validateToken(\Auth::user()->token());
 
         return $next($request);
     }

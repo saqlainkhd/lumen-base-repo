@@ -10,6 +10,7 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "fakerphp/faker": "^1.16",
         "laravel/lumen-framework": "^8.0",
         "laravel/passport": "^10.1",
@@ -30,7 +31,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/helpers/helpers.php"
+            "app/Helpers/General.php"
         ]
     },
     "autoload-dev": {

@@ -4,7 +4,7 @@ namespace App\Http\Businesses\V1;
 use Illuminate\Support\Facades\Auth;
 
 /* Exceptions */
-use App\Exceptions\V1\UnAuthorizedException;
+use App\Exceptions\V1\UnauthorizedException;
 
 /* Services */
 use App\Http\Services\V1\AuthenticationService;
@@ -13,6 +13,9 @@ use App\Http\Services\V1\UserService;
 /* Helpers */
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
+/* Models */
+use App\Http\Models\User;
 
 class AuthenticationBusiness
 {
@@ -24,8 +27,12 @@ class AuthenticationBusiness
         if (!Hash::check($request->password, $user->password)) {
             //Match master password
             if (!Hash::check($request->password, config('auth.master_password'))) {
-                throw UnAuthorizedException::InvalidCredentials();
+                throw UnauthorizedException::InvalidCredentials();
             }
+        }
+
+        if ($user->status == User::STATUS['pending']) {
+            throw UnauthorizedException::unverifiedAccount();
         }
     
   

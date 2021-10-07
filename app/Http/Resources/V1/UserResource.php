@@ -20,8 +20,12 @@ class UserResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
+            'phone' => $this->phone,
+            'city' => $this->city,
+            'country' => $this->country,
             'created_at'=>$this->created_at,
-            'status' => array_search($this->status, User::STATUS)
+            'status' => array_search($this->status, User::STATUS),
+            'customer' => new CustomerResource($this->whenLoaded('customer')),
         ];
     }
 }
