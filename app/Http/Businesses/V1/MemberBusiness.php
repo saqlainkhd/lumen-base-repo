@@ -30,4 +30,9 @@ class MemberBusiness
         $memeber = MemberService::store($user, $status);
         return $user->load('member');
     }
+
+    public static function show(int $id)
+    {
+        return UserService::first(['member'], ['id' => $id]);
+    }
 }

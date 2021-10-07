@@ -30,6 +30,7 @@ class MemberController extends Controller
         $ULP = '|' . $this->module . '_all|access_all'; //UPPER LEVEL PERMISSIONS
         $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
+        $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
     }
 
     /**
@@ -83,6 +84,24 @@ class MemberController extends Controller
         DB::beginTransaction();
         $member = MemberBusiness::store($request);
         DB::commit();
+        return new MemberResponse($member);
+    }
+
+    /**
+    * Show Member Detail
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam id integer required
+    *
+    * @responseFile 200 responses/V1/Member/CreateResponse.json
+    * @responseFile 401 responses/ValidationResponse.json
+    *
+    */
+    public function show(int $id)
+    {
+        $member = MemberBusiness::show($id);
         return new MemberResponse($member);
     }
 }
