@@ -166,6 +166,7 @@ class CustomerController extends Controller
     * @urlParam field string required ex: name or email
     * @urlParam value string required ex: Ali or ali@gmail.com
     * @urlParam deleted boolean
+    * @urlParam page_limit integer
     *
     * @responseFile 200 responses/V1/Customer/SmartSearchResponse.json
     * @responseFile 422 responses/ValidationResponse.json

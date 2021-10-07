@@ -169,8 +169,8 @@ class UserService
     {
         $query = User::query()->withTrashed()->roles($roles);
      
-        if ($request->filled('field') && $request->field == 'name') {
-            $name = User::clean($request->value);
+        if ($request->filled('name')) {
+            $name = User::clean($request->name);
 
             if (is_array($name)) {
                 $query->whereRaw("CONCAT(TRIM(LOWER(first_name)) , ' ' ,TRIM(LOWER(last_name))) in ('" . join("', '", $name) . "')");
@@ -180,8 +180,8 @@ class UserService
         }
 
 
-        if ($request->filled('field') && $request->field == 'email') {
-            $email = User::clean($request->value);
+        if ($request->filled('email')) {
+            $email = User::clean($request->email);
 
             if (is_array($email)) {
                 $query->whereRaw("TRIM(LOWER(email)) in ('" . join("', '", $email) . "')");
@@ -196,6 +196,6 @@ class UserService
             $query->whereNull('deleted_at');
         }
 
-        return $query->take(10)->get();
+        return $query->take(pageLimit($request))->get();
     }
 }

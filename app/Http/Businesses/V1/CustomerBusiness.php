@@ -60,7 +60,7 @@ class CustomerBusiness
    
     public static function search(Request $request)
     {
-        // $request->request->add([$request->field => $request->value]);
+        $request->merge([$request->field => $request->value]);
         $users =  UserService::search($request, ['customer']);
         $results = [];
         

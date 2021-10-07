@@ -29,7 +29,7 @@ class SmartSearchRequest extends RequestAbstract
     {
         return [
             'field' => 'required|string|'. Rule::in(array_values(Customer::SEARCHABLE)),
-            'value' => 'required|string',
+            'value' => 'required|string'
         ];
     }
 
