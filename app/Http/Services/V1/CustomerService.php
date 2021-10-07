@@ -14,7 +14,7 @@ use App\Exceptions\V1\FailureException;
 
 class CustomerService
 {
-    public static function store(User $user, $status = null)
+    public static function store(User $user, $status = null) : Customer
     {
         $customer = new Customer();
         $customer->user_id = $user->id;
@@ -28,7 +28,7 @@ class CustomerService
         return $customer;
     }
 
-    public static function update(Customer $customer, $status = null)
+    public static function update(Customer $customer, $status = null) : Customer
     {
         $customer->status = $status ?: User::STATUS['pending'];
         $customer->save();

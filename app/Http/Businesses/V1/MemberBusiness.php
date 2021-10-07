@@ -35,4 +35,18 @@ class MemberBusiness
     {
         return UserService::first(['member'], ['id' => $id]);
     }
+
+    public static function update(Request $request, int $id)
+    {
+        $user = UserService::first(['member'], ['id' => $id]);
+
+        if ($user->id != \Auth::id() && !\Auth::user()->can('access_all')) {
+            throw ModelException::dataNotFound();
+        }
+
+        $status = ($request->filled('status')) ? User::STATUS[$request->status] : null;
+        $user = UserService::update($user, $request, $status);
+        $memeber = MemberService::update($user->member, $status);
+        return $user->load('member');
+    }
 }

@@ -31,6 +31,7 @@ class MemberController extends Controller
         $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
+        $this->middleware('permission:' . $this->module . '_update' . $ULP, ['only' => ['update']]);
     }
 
     /**
@@ -102,6 +103,32 @@ class MemberController extends Controller
     public function show(int $id)
     {
         $member = MemberBusiness::show($id);
+        return new MemberResponse($member);
+    }
+
+    /**
+    * Update Member
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam id integer required
+    * @bodyParam first_name string
+    * @bodyParam last_name string
+    * @bodyParam email email required
+    * @bodyParam phone string required
+    * @bodyParam city Integer required
+    * @bodyParam country string required
+    * @bodyParam status string required ex: pending or active
+    *
+    * @responseFile 200 responses/V1/Member/CreateResponse.json
+    * @responseFile 422 responses/ValidationResponse.json
+    */
+    public function update(MemberRequest $request, int $id)
+    {
+        DB::beginTransaction();
+        $member = MemberBusiness::update($request, $id);
+        DB::commit();
         return new MemberResponse($member);
     }
 }

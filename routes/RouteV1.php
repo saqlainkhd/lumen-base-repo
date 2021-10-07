@@ -22,6 +22,7 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
             $router->get('/', 'MemberController@index');
             $router->get('/{id}', 'MemberController@show');
             $router->post('/', 'MemberController@create');
+            $router->put('/{id}', 'MemberController@update');
         });
     });
 });

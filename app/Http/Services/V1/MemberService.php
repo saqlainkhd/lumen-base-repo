@@ -14,7 +14,7 @@ use App\Exceptions\V1\FailureException;
 
 class MemberService
 {
-    public static function store(User $user, $status = null)
+    public static function store(User $user, $status = null) : Member
     {
         $memeber = new Member();
         $memeber->user_id = $user->id;
@@ -26,5 +26,17 @@ class MemberService
         }
 
         return $memeber;
+    }
+
+    public static function update(Member $member, $status = null) : Member
+    {
+        $member->status = $status ?: User::STATUS['pending'];
+        $member->save();
+
+        if (!$member) {
+            throw FailureException::serverError();
+        }
+
+        return $member;
     }
 }
