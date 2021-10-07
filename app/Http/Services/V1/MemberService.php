@@ -3,7 +3,7 @@
 namespace App\Http\Services\V1;
 
 /* Models */
-use App\Http\Models\Memeber;
+use App\Http\Models\Member;
 use App\Http\Models\User;
 
 /* Helpers */
@@ -16,7 +16,7 @@ class MemberService
 {
     public static function store(User $user, $status = null)
     {
-        $memeber = new Memeber();
+        $memeber = new Member();
         $memeber->user_id = $user->id;
         $memeber->status = $status ?: User::STATUS['pending'];
         $memeber->save();

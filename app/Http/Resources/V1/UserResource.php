@@ -26,6 +26,7 @@ class UserResource extends JsonResource
             'created_at'=>$this->created_at,
             'status' => array_search($this->status, User::STATUS),
             'customer' => new CustomerResource($this->whenLoaded('customer')),
+            'member' => new MemberResource($this->whenLoaded('member')),
         ];
     }
 }

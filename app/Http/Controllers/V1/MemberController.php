@@ -18,9 +18,9 @@ use Illuminate\Http\Request;
 use DB;
 
 /**
- * @group Customer
+ * @group Member
  */
-class CustomerController extends Controller
+class MemberController extends Controller
 {
     public function __construct()
     {

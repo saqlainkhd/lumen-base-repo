@@ -21,8 +21,8 @@ class MemberBusiness
     public static function store(Request $request)
     {
         $status = ($request->filled('status')) ? User::STATUS[$request->status] : null;
-        $user = UserService::store($request, 'memeber', $status);
+        $user = UserService::store($request, 'member', $status);
         $memeber = MemberService::store($user, $status);
-        return $user->load('memeber');
+        return $user->load('member');
     }
 }

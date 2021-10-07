@@ -48,6 +48,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasOne(Customer::class);
     }
 
+    public function member()
+    {
+        return $this->hasOne(Member::class);
+    }
+
     public static function clean($value)
     {
         $value = strtolower($value);
