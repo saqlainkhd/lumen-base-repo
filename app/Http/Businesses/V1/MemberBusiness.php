@@ -18,6 +18,11 @@ use Illuminate\Http\Request;
 
 class MemberBusiness
 {
+    public static function get(Request $request)
+    {
+        return UserService::get($request, ['member'], ['member']);
+    }
+
     public static function store(Request $request)
     {
         $status = ($request->filled('status')) ? User::STATUS[$request->status] : null;

@@ -9,9 +9,11 @@ use App\Http\Businesses\V1\MemberBusiness;
 
 /* Request Validations */
 use App\Http\Requests\V1\MemberRequest;
+use App\Http\Requests\V1\MemberListRequest;
 
 /* Resource */
 use App\Http\Resources\V1\MemberResponse;
+use App\Http\Resources\V1\MembersResponse;
 
 /* Helpers */
 use Illuminate\Http\Request;
@@ -26,9 +28,35 @@ class MemberController extends Controller
     {
         $this->module = 'members';
         $ULP = '|' . $this->module . '_all|access_all'; //UPPER LEVEL PERMISSIONS
+        $this->middleware('permission:' . $this->module . '_list' . $ULP, ['only' => ['index']]);
         $this->middleware('permission:' . $this->module . '_create' . $ULP, ['only' => ['create']]);
     }
 
+    /**
+    * Get Members
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam users string 1,2,3,4
+    * @urlParam email string ex: abc.com,xyz.co
+    * @urlParam phone string ex: 123,123456
+    * @urlParam name string
+    * @urlParam status string ex: pending,active,blocked
+    * @urlParam to_date string Example: Y-m-d
+    * @urlParam from_date string Example: Y-m-d
+    * @urlParam pagination boolean
+    *
+    * @responseFile 200 responses/V1/Member/ListResponse.json
+    * @responseFile 401 responses/ValidationResponse.json
+    *
+    */
+
+    public function index(MemberListRequest $request)
+    {
+        $members = MemberBusiness::get($request);
+        return new MembersResponse($members);
+    }
 
 
     /**

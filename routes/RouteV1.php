@@ -11,14 +11,15 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->group(['prefix' => 'customers'], function () use ($router) {
             $router->get('/', 'CustomerController@index');
+            $router->get('/search', 'CustomerController@search');
+            $router->get('/{id}', 'CustomerController@show');
             $router->post('/', 'CustomerController@create');
             $router->put('/{id}', 'CustomerController@update');
-            $router->get('/{id}', 'CustomerController@show');
             $router->delete('/{id}', 'CustomerController@destory');
-            $router->get('/search', 'CustomerController@search');
         });
 
         $router->group(['prefix' => 'members'], function () use ($router) {
+            $router->get('/', 'MemberController@index');
             $router->post('/', 'MemberController@create');
         });
     });
