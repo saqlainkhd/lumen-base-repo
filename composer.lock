@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a63557cbce86de768d2c103d4ec3886",
+    "content-hash": "3b8910929939fafea0160f86c79404a7",
     "packages": [
         {
             "name": "brick/math",
@@ -6495,20 +6495,20 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "2.7.10",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "0f0364685ed27cd9227b291da6b06039f1ae286c"
+                "reference": "c156352cdf18013b3211c6e246c9e40944dc6019"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/0f0364685ed27cd9227b291da6b06039f1ae286c",
-                "reference": "0f0364685ed27cd9227b291da6b06039f1ae286c",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/c156352cdf18013b3211c6e246c9e40944dc6019",
+                "reference": "c156352cdf18013b3211c6e246c9e40944dc6019",
                 "shasum": ""
             },
             "require": {
-                "erusev/parsedown": "^1.7.4",
+                "erusev/parsedown": "^1.7",
                 "ext-fileinfo": "*",
                 "ext-json": "*",
                 "ext-pdo": "*",
@@ -6516,13 +6516,14 @@
                 "illuminate/console": "^6.0|^7.0|^8.0",
                 "illuminate/routing": "^6.0|^7.0|^8.0",
                 "illuminate/support": "^6.0|^7.0|^8.0",
-                "knuckleswtf/pastel": "^1.3.6",
                 "league/flysystem": "^1.0",
                 "mpociot/reflection-docblock": "^1.0.1",
+                "nikic/php-parser": "^4.10",
                 "nunomaduro/collision": "^3.0|^4.0|^5.0",
-                "php": ">=7.2.5",
+                "php": ">=7.4",
                 "ramsey/uuid": "^3.8|^4.0",
                 "shalvah/clara": "^2.6",
+                "spatie/data-transfer-object": "^2.6",
                 "symfony/var-exporter": "^4.0|^5.0",
                 "symfony/yaml": "^4.0|^5.0"
             },
@@ -6530,7 +6531,7 @@
                 "mpociot/laravel-apidoc-generator": "*"
             },
             "require-dev": {
-                "brianium/paratest": "^5.0|^6.0",
+                "brianium/paratest": "^6.0",
                 "dms/phpunit-arraysubset-asserts": "^0.2.0",
                 "laravel/legacy-factories": "^1.0.4",
                 "laravel/lumen-framework": "^6.0|^7.0|^8.0",
@@ -6553,7 +6554,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Knuckles\\Scribe\\": "src/"
+                    "Knuckles\\Scribe\\": "src/",
+                    "Knuckles\\Camel\\": "camel/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6580,7 +6582,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-06-30T10:28:43+00:00"
+            "time": "2021-06-29T16:44:43+00:00"
         },
         {
             "name": "league/flysystem",
@@ -8885,6 +8887,61 @@
                 "logging"
             ],
             "time": "2020-04-12T11:08:11+00:00"
+        },
+        {
+            "name": "spatie/data-transfer-object",
+            "version": "2.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/data-transfer-object.git",
+                "reference": "2625a59566804ec63f01947d85947336237cbda6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/2625a59566804ec63f01947d85947336237cbda6",
+                "reference": "2625a59566804ec63f01947d85947336237cbda6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "suggest": {
+                "phpstan/phpstan": "Take advantage of checkUninitializedProperties with \\Spatie\\DataTransferObject\\PHPstan\\PropertiesAreAlwaysInitializedExtension"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data transfer objects with batteries included",
+            "homepage": "https://github.com/spatie/data-transfer-object",
+            "keywords": [
+                "data-transfer-object",
+                "spatie"
+            ],
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/spatie",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-12T08:46:52+00:00"
         },
         {
             "name": "symfony/routing",
