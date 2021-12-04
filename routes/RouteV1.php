@@ -18,6 +18,8 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
             $router->delete('/{id}', 'CustomerController@destory');
         });
 
+        
+
         $router->group(['prefix' => 'members'], function () use ($router) {
             $router->get('/', 'MemberController@index');
             $router->get('/search', 'MemberController@search');
