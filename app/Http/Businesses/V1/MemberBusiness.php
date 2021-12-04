@@ -67,4 +67,10 @@ class MemberBusiness
         
         return collect($results);
     }
+
+    public static function delete(int $id) : void
+    {
+        $user = UserService::first(['member'], ['id' => $id]);
+        UserService::delete($user);
+    }
 }

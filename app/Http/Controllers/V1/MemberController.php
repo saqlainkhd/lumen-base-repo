@@ -16,6 +16,7 @@ use App\Http\Requests\V1\SmartSearchRequest;
 use App\Http\Resources\V1\MemberResponse;
 use App\Http\Resources\V1\MembersResponse;
 use App\Http\Resources\V1\SmartSearchResponse;
+use App\Http\Resources\SuccessResponse;
 
 /* Helpers */
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class MemberController extends Controller
         $this->middleware('permission:' . $this->module . '_detail' . $ULP, ['only' => ['show']]);
         $this->middleware('permission:' . $this->module . '_update' . $ULP, ['only' => ['update']]);
         $this->middleware('permission:' . $this->module . '_search' . $ULP, ['only' => ['search']]);
+        $this->middleware('permission:' . $this->module . '_delete' . $ULP, ['only' => ['destory']]);
     }
 
     /**
@@ -155,5 +157,23 @@ class MemberController extends Controller
     {
         $data = MemberBusiness::search($request);
         return new SmartSearchResponse($data);
+    }
+
+    /**
+    * Delete Member
+    *
+    * @authenticated
+    * @header Authorization Bearer token
+    *
+    * @urlParam id integer required
+    *
+    * @responseFile 200 responses/SuccessResponse.json
+    * @responseFile 401 responses/ValidationResponse.json
+    *
+    */
+    public function destory(int $id)
+    {
+        $customer = MemberBusiness::delete($id);
+        return new SuccessResponse([]);
     }
 }

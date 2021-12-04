@@ -16,7 +16,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasApiTokens, HasRoles, UserAuditTrait, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['customer'];
+    protected $cascadeDeletes = ['customer','member'];
 
     public const STATUS = ['pending' => 0, 'active' => 1, 'blocked' => 2];
 

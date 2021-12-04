@@ -24,6 +24,7 @@ $router->group(['prefix' => 'v1','namespace' => 'V1'], function () use ($router)
             $router->get('/{id}', 'MemberController@show');
             $router->post('/', 'MemberController@create');
             $router->put('/{id}', 'MemberController@update');
+            $router->delete('/{id}', 'MemberController@destory');
         });
     });
 });
